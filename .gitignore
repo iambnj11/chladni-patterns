@@ -1,0 +1,29 @@
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Node
+node_modules/
+
+# Vite build output
+dist/
+dist-ssr/
+*.local
+
+# Export output
+output/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings (user-specific)
+.claude/
+
+# Personal project notes
+ProjectDescription/

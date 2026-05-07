@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chladni Pattern Visualizer</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+
+<div id="canvas-container"></div>
+
+<button id="panel-toggle">☰</button>
+
+<div id="panel">
+  <div>
+    <div class="panel-title">Chladni<span>pattern visualizer</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Frequency display -->
+  <div>
+    <div id="freq-display">440 <span>Hz</span></div>
+    <div class="mode-display" id="mode-display">mode n=2 m=3</div>
+  </div>
+
+  <!-- Frequency / N / M sliders -->
+  <div class="ctrl-group">
+    <div class="ctrl-row">
+      <div class="ctrl-row-inline">
+        <div class="ctrl-label">Frequency</div>
+        <div class="value-badge" id="freq-val">440 Hz</div>
+      </div>
+      <input type="range" id="freq-slider" min="20" max="2000" value="440" step="1" />
+    </div>
+
+    <div class="ctrl-row">
+      <div class="ctrl-row-inline">
+        <div class="ctrl-label">Mode N</div>
+        <div class="value-badge" id="n-val">2</div>
+      </div>
+      <input type="range" id="n-slider" min="1" max="12" value="2" step="0.01" class="orange" />
+    </div>
+
+    <div class="ctrl-row">
+      <div class="ctrl-row-inline">
+        <div class="ctrl-label">Mode M</div>
+        <div class="value-badge" id="m-val">3</div>
+      </div>
+      <input type="range" id="m-slider" min="1" max="12" value="3" step="0.01" class="orange" />
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Render mode -->
+  <div class="ctrl-group">
+    <div class="ctrl-label">Render Mode</div>
+    <div class="toggle-row">
+      <button class="toggle-btn active" data-mode="flat">Flat</button>
+      <button class="toggle-btn" data-mode="relief">Relief</button>
+      <button class="toggle-btn" data-mode="particles">Particles</button>
+    </div>
+  </div>
+
+  <!-- Presets -->
+  <div class="ctrl-group">
+    <div class="ctrl-label">Presets</div>
+    <div class="toggle-row" id="preset-row"></div>
+  </div>
+
+  <!-- Color palette -->
+  <div class="ctrl-group">
+    <div class="ctrl-label">Color Palette</div>
+    <div class="swatch-row">
+      <div class="swatch active" data-palette="0" style="background: linear-gradient(135deg,#000,#00e5ff,#fff)"></div>
+      <div class="swatch" data-palette="1" style="background: linear-gradient(135deg,#0a0010,#ff6b35,#ffe566)"></div>
+      <div class="swatch" data-palette="2" style="background: linear-gradient(135deg,#000,#7b2fff,#00ffb3)"></div>
+      <div class="swatch" data-palette="3" style="background: linear-gradient(135deg,#fff,#bbb,#333)"></div>
+    </div>
+  </div>
+
+  <!-- Threshold / speed -->
+  <div class="ctrl-group">
+    <div class="ctrl-row">
+      <div class="ctrl-row-inline">
+        <div class="ctrl-label">Node Threshold</div>
+        <div class="value-badge" id="thresh-val">0.12</div>
+      </div>
+      <input type="range" id="thresh-slider" min="0.01" max="0.5" value="0.12" step="0.01" />
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-row-inline">
+        <div class="ctrl-label">Anim Speed</div>
+        <div class="value-badge" id="speed-val">1.0</div>
+      </div>
+      <input type="range" id="speed-slider" min="0" max="3" value="1" step="0.05" />
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Audio input -->
+  <div class="ctrl-group">
+    <div class="ctrl-label">Audio Input</div>
+    <button id="mic-btn">
+      <div class="mic-dot"></div>
+      Enable Microphone
+    </button>
+    <div style="font-size:9px;color:var(--muted);line-height:1.6;">
+      Mic input maps dominant frequency to mode parameters in real-time.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    Chladni patterns form at resonant frequencies of a vibrating plate.
+    Nodal lines (z≈0) show where sand accumulates.<br><br>
+    z(x,y) = cos(nπx)·cos(mπy) − cos(mπx)·cos(nπy)
+  </div>
+</div>
+
+<div id="hint">drag to rotate &nbsp;·&nbsp; scroll to zoom</div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
