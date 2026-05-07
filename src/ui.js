@@ -48,26 +48,22 @@ freqSlider.addEventListener('input', e => {
   mSlider.value = state.targetM;
   nVal.textContent = state.targetN.toFixed(1);
   mVal.textContent = state.targetM.toFixed(1);
-  if (state.renderMode === 'particles') buildParticles();
 });
 
 nSlider.addEventListener('input', e => {
   state.targetN = +e.target.value;
   nVal.textContent = (+e.target.value).toFixed(1);
-  if (state.renderMode === 'particles') buildParticles();
 });
 
 mSlider.addEventListener('input', e => {
   state.targetM = +e.target.value;
   mVal.textContent = (+e.target.value).toFixed(1);
-  if (state.renderMode === 'particles') buildParticles();
 });
 
 threshSlider.addEventListener('input', e => {
   state.threshold = +e.target.value;
   threshVal.textContent = (+e.target.value).toFixed(2);
   uniforms.uThreshold.value = state.threshold;
-  if (state.renderMode === 'particles') buildParticles();
 });
 
 speedSlider.addEventListener('input', e => {
@@ -115,7 +111,6 @@ document.querySelectorAll('[data-palette]').forEach(sw => {
     uniforms.uColorA.value.set(...pal[0]);
     uniforms.uColorB.value.set(...pal[1]);
     uniforms.uColorC.value.set(...pal[2]);
-    if (state.renderMode === 'particles') buildParticles();
   });
 });
 

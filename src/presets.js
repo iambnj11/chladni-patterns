@@ -1,6 +1,5 @@
 import gsap from 'gsap';
 import { state } from './state.js';
-import { buildParticles } from './particles.js';
 
 export const PRESETS = [
   { name: 'A4',       n: 2, m: 3 },
@@ -18,16 +17,8 @@ export function isTweenActive() { return _isTweening; }
 export function applyPreset(preset) {
   state.targetN = preset.n;
   state.targetM = preset.m;
-
-  // Particles have baked positions — snap immediately rather than animating invisibly
-  if (state.renderMode === 'particles') {
-    state.n = preset.n;
-    state.m = preset.m;
-    buildParticles();
-    return;
-  }
-
   _isTweening = true;
+
   gsap.killTweensOf(state);
   gsap.to(state, {
     n: preset.n,
