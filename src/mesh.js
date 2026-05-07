@@ -17,6 +17,8 @@ export const uniforms = {
   uColorC:     { value: new THREE.Vector3(...PALETTES[0][2]) },
   uRenderMode: { value: 0.0 },
   uAmplitude:  { value: 0.3 },
+  uZStatic:    { value: 0.0 },
+  uZHeight:    { value: 0.0 },
 };
 
 export const mesh = new THREE.Mesh(

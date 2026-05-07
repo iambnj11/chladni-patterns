@@ -5,7 +5,8 @@ export const state = {
   threshold: 0.12,
   speed: 1.0,
   palette: 0,
-  renderMode: 'flat',
+  renderMode: 'particles',
+  zMode: 'animated',
   micActive: false,
   time: 0,
 };

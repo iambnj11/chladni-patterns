@@ -75,6 +75,25 @@ speedSlider.addEventListener('input', e => {
   speedVal.textContent = (+e.target.value).toFixed(1);
 });
 
+const zHeightRow    = document.getElementById('z-height-row');
+const zHeightSlider = document.getElementById('zheight-slider');
+const zHeightVal    = document.getElementById('zheight-val');
+
+document.querySelectorAll('[data-zmode]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-zmode]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.zMode = btn.dataset.zmode;
+    uniforms.uZStatic.value = state.zMode === 'manual' ? 1.0 : 0.0;
+    zHeightRow.style.display = state.zMode === 'manual' ? 'flex' : 'none';
+  });
+});
+
+zHeightSlider.addEventListener('input', e => {
+  uniforms.uZHeight.value = +e.target.value;
+  zHeightVal.textContent = (+e.target.value).toFixed(2);
+});
+
 document.querySelectorAll('[data-mode]').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('[data-mode]').forEach(b => b.classList.remove('active'));

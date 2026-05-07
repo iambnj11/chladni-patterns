@@ -3,6 +3,8 @@ uniform float uM;
 uniform float uTime;
 uniform float uRenderMode;
 uniform float uAmplitude;
+uniform float uZStatic;
+uniform float uZHeight;
 
 varying vec2 vUv;
 varying float vZ;
@@ -20,7 +22,13 @@ void main() {
 
   vec3 pos = position;
   if (uRenderMode > 0.5) {
-    pos.z = z * uAmplitude * sin(uTime * 1.5);
+    float disp;
+    if (uZStatic > 0.5) {
+      disp = uZHeight;
+    } else {
+      disp = uAmplitude * sin(uTime * 1.5);
+    }
+    pos.z = z * disp;
   }
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }

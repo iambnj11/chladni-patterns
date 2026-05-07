@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import { state } from './state.js';
+import { buildParticles } from './particles.js';
 
 export const PRESETS = [
   { name: 'A4',       n: 2, m: 3 },
@@ -11,13 +12,22 @@ export const PRESETS = [
   { name: 'Web',      n: 5, m: 7 },
 ];
 
-export let isTweening = false;
+let _isTweening = false;
+export function isTweenActive() { return _isTweening; }
 
 export function applyPreset(preset) {
   state.targetN = preset.n;
   state.targetM = preset.m;
-  isTweening = true;
 
+  // Particles have baked positions — snap immediately rather than animating invisibly
+  if (state.renderMode === 'particles') {
+    state.n = preset.n;
+    state.m = preset.m;
+    buildParticles();
+    return;
+  }
+
+  _isTweening = true;
   gsap.killTweensOf(state);
   gsap.to(state, {
     n: preset.n,
@@ -25,7 +35,7 @@ export function applyPreset(preset) {
     duration: 1.2,
     ease: 'power2.inOut',
     onComplete() {
-      isTweening = false;
+      _isTweening = false;
     },
   });
 }

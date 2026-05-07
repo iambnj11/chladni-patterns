@@ -1,12 +1,17 @@
 import * as THREE from 'three';
 import { renderer, scene, camera } from './scene.js';
-import { uniforms } from './mesh.js';
+import { uniforms, mesh } from './mesh.js';
 import { controls } from './controls.js';
 import { state } from './state.js';
 import { freqToMode } from './constants.js';
 import { getDominantFrequency } from './audio.js';
 import { syncFreqUI } from './ui.js';
-import { isTweening } from './presets.js';
+import { isTweenActive } from './presets.js';
+import { buildParticles } from './particles.js';
+
+// Initialize default render state (particles)
+mesh.visible = false;
+buildParticles();
 
 const clock = new THREE.Clock();
 
@@ -28,8 +33,8 @@ function animate() {
     }
   }
 
-  // During a GSAP preset tween, skip the lerp so it doesn't fight the animation
-  if (!isTweening) {
+  // Skip lerp while GSAP preset tween owns state.n/m
+  if (!isTweenActive()) {
     const lerpSpeed = 2.5 * dt;
     state.n += (state.targetN - state.n) * lerpSpeed;
     state.m += (state.targetM - state.m) * lerpSpeed;

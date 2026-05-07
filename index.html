@@ -58,9 +58,9 @@
   <div class="ctrl-group">
     <div class="ctrl-label">Render Mode</div>
     <div class="toggle-row">
-      <button class="toggle-btn active" data-mode="flat">Flat</button>
+      <button class="toggle-btn" data-mode="flat">Flat</button>
       <button class="toggle-btn" data-mode="relief">Relief</button>
-      <button class="toggle-btn" data-mode="particles">Particles</button>
+      <button class="toggle-btn active" data-mode="particles">Particles</button>
     </div>
   </div>
 
@@ -96,6 +96,22 @@
         <div class="value-badge" id="speed-val">1.0</div>
       </div>
       <input type="range" id="speed-slider" min="0" max="3" value="1" step="0.05" />
+    </div>
+  </div>
+
+  <!-- Z Offset mode (Relief only) -->
+  <div class="ctrl-group">
+    <div class="ctrl-label">Z Offset</div>
+    <div class="toggle-row">
+      <button class="toggle-btn active" data-zmode="animated">Animated</button>
+      <button class="toggle-btn" data-zmode="manual">Manual</button>
+    </div>
+    <div class="ctrl-row" id="z-height-row" style="display:none">
+      <div class="ctrl-row-inline">
+        <div class="ctrl-label">Z Height</div>
+        <div class="value-badge" id="zheight-val">0.00</div>
+      </div>
+      <input type="range" id="zheight-slider" min="-0.5" max="0.5" value="0" step="0.01" />
     </div>
   </div>
 
